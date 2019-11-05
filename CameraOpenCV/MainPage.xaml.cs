@@ -47,6 +47,7 @@ namespace SDKTemplate
         public MainPage()
         {
             this.InitializeComponent();
+            App.container = this.StatusPanel;
 
             // This is a static public property that allows downstream pages to get a handle to the MainPage instance
             // in order to call methods that are in this class.

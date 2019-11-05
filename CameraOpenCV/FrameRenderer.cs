@@ -497,7 +497,7 @@ namespace SDKTemplate
             }
         }
 
-        public void Contours(SoftwareBitmap input, SoftwareBitmap output, Algorithm algorithm)
+        public async void Contours(SoftwareBitmap input, SoftwareBitmap output, Algorithm algorithm)
         {
             if (algorithm.AlgorithmName == "Contours")
             {
@@ -573,7 +573,16 @@ namespace SDKTemplate
                     //    0);
                     ////return Cv2.ContourArea(res);
                 }
-                Cv2.ImShow("Contours", mOutput);
+
+                // Must run on UI thread.  The winrt container also needs to be set.  OpenCvSharp doesn't expose this yet.  Crashes here because container is null.
+                if (App.dispatcher != null)
+                {
+                    await App.dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+                    {
+                        Cv2.ImShow("Contours", mOutput);
+                    });
+                }
+
                 Mat2SoftwareBitmap(mOutput, output);
             }
         }

@@ -28,6 +28,9 @@ namespace SDKTemplate
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
+        static public Windows.UI.Core.CoreDispatcher dispatcher = null;
+        static public Panel container = null;
+
         public App()
         {
             this.InitializeComponent();
@@ -69,6 +72,8 @@ namespace SDKTemplate
 
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
+
+                dispatcher = Window.Current.Dispatcher;
             }
 
             if (rootFrame.Content == null)
