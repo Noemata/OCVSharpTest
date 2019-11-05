@@ -15,11 +15,17 @@ This dumb hack was made to the OpenCV cvdef.h header, not sure why adding _WIN32
 #endif
 ```
 
-Support for compiled headers should really be done like this:
+Changed to a not so dumb hack in pch.h instead of above, so no need to change anything in OpenCV.  OpenCVSharp is also a drop in, no changes needed.
+
+```
+#define CV_EXPORTS __declspec(dllexport)
+```
+
+Support for compiled headers should really be done something like this, except this won't actually work because of precompiled header limitations:
 
 
 ```
-#ifdef WINRT
+#ifdef _WINRT_DLL
 #include "pch.h"
 #endif
 #include "aruco.h"
