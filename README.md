@@ -6,6 +6,25 @@ Many aspects of the code are working, but no attempt was made to get things righ
 
 If you do fix the remaining issues, please leave a note in the issues section here.
 
+This dumb hack was made to the OpenCV cvdef.h header, not sure why adding _WIN32 def didn't work.
+
+```
+#ifndef CV_EXPORTS
+#   define CV_EXPORTS __declspec(dllexport)
+//# define CV_EXPORTS
+#endif
+```
+
+Support for compiled headers should really be done like this:
+
+
+```
+#ifdef WINRT
+#include "pch.h"
+#endif
+#include "aruco.h"
+```
+
 ## Building
 
 1. Use vcpkg to get OpenCV for uwp
