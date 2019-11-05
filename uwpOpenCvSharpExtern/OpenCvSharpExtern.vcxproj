@@ -1,0 +1,359 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|ARM">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM">
+      <Configuration>Release</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{bd5471e5-7b55-5192-8da4-042b66af71ae}</ProjectGuid>
+    <Keyword>WindowsRuntimeComponent</Keyword>
+    <RootNamespace>OpenCVBridge</RootNamespace>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.18362.0</WindowsTargetPlatformMinVersion>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <ProjectName>uwpOpenCvSharpExtern</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <GenerateManifest>false</GenerateManifest>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\$(MSBuildProjectName)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>OpenCvSharpExtern</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <GenerateManifest>false</GenerateManifest>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\$(MSBuildProjectName)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>OpenCvSharpExtern</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <GenerateManifest>false</GenerateManifest>
+    <TargetName>OpenCvSharpExtern</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <GenerateManifest>false</GenerateManifest>
+    <TargetName>OpenCvSharpExtern</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <GenerateManifest>false</GenerateManifest>
+    <TargetName>OpenCvSharpExtern</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <GenerateManifest>false</GenerateManifest>
+    <TargetName>OpenCvSharpExtern</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PreprocessorDefinitions>_WINRT_DLL;_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
+      <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <DisableSpecificWarnings>28204</DisableSpecificWarnings>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <AdditionalLibraryDirectories>D:\Samples\vcpkg\packages\opencv4_x86-uwp\debug\lib;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_cored.lib;opencv_imgprocd.lib;opencv_imgcodecsd.lib;opencv_objdetectd.lib;opencv_mld.lib;WindowsApp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PreprocessorDefinitions>_WINRT_DLL;_WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
+      <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <DisableSpecificWarnings>28204</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <AdditionalLibraryDirectories>D:\Samples\vcpkg\packages\opencv4_x86-uwp\lib;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_core.lib;opencv_imgproc.lib;opencv_imgcodecs.lib;opencv_objdetect.lib;opencv_ml.lib;WindowsApp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PreprocessorDefinitions>_WINRT_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
+      <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <DisableSpecificWarnings>28204</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PreprocessorDefinitions>_WINRT_DLL;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
+      <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <DisableSpecificWarnings>28204</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PreprocessorDefinitions>_WINRT_DLL;_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
+      <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <DisableSpecificWarnings>28204</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <AdditionalDependencies>opencv_cored.lib;opencv_imgprocd.lib;opencv_imgcodecsd.lib;opencv_objdetectd.lib;opencv_mld.lib;WindowsApp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PreprocessorDefinitions>_WINRT_DLL;_WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
+      <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <DisableSpecificWarnings>28204</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <AdditionalDependencies>opencv_core.lib;opencv_imgproc.lib;opencv_imgcodecs.lib;opencv_objdetect.lib;opencv_ml.lib;WindowsApp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="aruco.h" />
+    <ClInclude Include="bgsegm.h" />
+    <ClInclude Include="calib3d.h" />
+    <ClInclude Include="calib3d_fisheye.h" />
+    <ClInclude Include="calib3d_StereoBM.h" />
+    <ClInclude Include="calib3d_StereoMatcher.h" />
+    <ClInclude Include="calib3d_StereoSGBM.h" />
+    <ClInclude Include="core.h" />
+    <ClInclude Include="core_Algorithm.h" />
+    <ClInclude Include="core_FileNode.h" />
+    <ClInclude Include="core_FileStorage.h" />
+    <ClInclude Include="core_InputArray.h" />
+    <ClInclude Include="core_LDA.h" />
+    <ClInclude Include="core_Mat.h" />
+    <ClInclude Include="core_MatExpr.h" />
+    <ClInclude Include="core_OutputArray.h" />
+    <ClInclude Include="core_PCA.h" />
+    <ClInclude Include="core_RNG.h" />
+    <ClInclude Include="core_SparseMat.h" />
+    <ClInclude Include="core_SVD.h" />
+    <ClInclude Include="face_BasicFaceRecognizer.h" />
+    <ClInclude Include="face_EigenFaceRecognizer.h" />
+    <ClInclude Include="face_Facemark.h" />
+    <ClInclude Include="face_FaceRecognizer.h" />
+    <ClInclude Include="face_FisherFaceRecognizer.h" />
+    <ClInclude Include="face_LBPHFaceRecognizer.h" />
+    <ClInclude Include="features2d.h" />
+    <ClInclude Include="features2d_AgastFeatureDetector.h" />
+    <ClInclude Include="features2d_AKAZE.h" />
+    <ClInclude Include="features2d_BOW.h" />
+    <ClInclude Include="features2d_BRISK.h" />
+    <ClInclude Include="features2d_DescriptorMatcher.h" />
+    <ClInclude Include="features2d_FastFeatureDetector.h" />
+    <ClInclude Include="features2d_FeatureDetector.h" />
+    <ClInclude Include="features2d_GFTTDetector.h" />
+    <ClInclude Include="features2d_KAZE.h" />
+    <ClInclude Include="features2d_KeyPointsFilter.h" />
+    <ClInclude Include="features2d_MSER.h" />
+    <ClInclude Include="features2d_ORB.h" />
+    <ClInclude Include="features2d_SimpleBlobDetector.h" />
+    <ClInclude Include="flann.h" />
+    <ClInclude Include="flann_IndexParams.h" />
+    <ClInclude Include="highgui.h" />
+    <ClInclude Include="imgcodecs.h" />
+    <ClInclude Include="imgproc.h" />
+    <ClInclude Include="imgproc_CLAHE.h" />
+    <ClInclude Include="imgproc_GeneralizedHough.h" />
+    <ClInclude Include="imgproc_LineIterator.h" />
+    <ClInclude Include="imgproc_Subdiv2D.h" />
+    <ClInclude Include="img_hash.h" />
+    <ClInclude Include="include_opencv.h" />
+    <ClInclude Include="ml.h" />
+    <ClInclude Include="ml_ANN_MLP.h" />
+    <ClInclude Include="ml_Boost.h" />
+    <ClInclude Include="ml_DTrees.h" />
+    <ClInclude Include="ml_EM.h" />
+    <ClInclude Include="ml_KNearest.h" />
+    <ClInclude Include="ml_LogisticRegression.h" />
+    <ClInclude Include="ml_NormalBayesClassifier.h" />
+    <ClInclude Include="ml_RTrees.h" />
+    <ClInclude Include="ml_StatModel.h" />
+    <ClInclude Include="ml_SVM.h" />
+    <ClInclude Include="my_functions.h" />
+    <ClInclude Include="my_types.h" />
+    <ClInclude Include="objdetect.h" />
+    <ClInclude Include="objdetect_HOGDescriptor.h" />
+    <ClInclude Include="objdetect_QRCodeDetector.h" />
+    <ClInclude Include="optflow.h" />
+    <ClInclude Include="optflow_motempl.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="photo.h" />
+    <ClInclude Include="photo_HDR.h" />
+    <ClInclude Include="shape_ShapeDistanceExtractor.h" />
+    <ClInclude Include="std_string.h" />
+    <ClInclude Include="std_vector.h" />
+    <ClInclude Include="stitching.h" />
+    <ClInclude Include="stitching_detail_Matchers.h" />
+    <ClInclude Include="tracking.h" />
+    <ClInclude Include="tracking_MultiTracker.h" />
+    <ClInclude Include="video.h" />
+    <ClInclude Include="videoio.h" />
+    <ClInclude Include="video_background_segm.h" />
+    <ClInclude Include="video_tracking.h" />
+    <ClInclude Include="xfeatures2d.h" />
+    <ClInclude Include="ximgproc.h" />
+    <ClInclude Include="ximgproc_EdgeBoxes.h" />
+    <ClInclude Include="ximgproc_FastHoughTransform.h" />
+    <ClInclude Include="ximgproc_FastLineDetector.h" />
+    <ClInclude Include="ximgproc_Paillou.h" />
+    <ClInclude Include="ximgproc_Segmentation.h" />
+    <ClInclude Include="ximgproc_StructuredEdgeDetection.h" />
+    <ClInclude Include="xphoto.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="aruco.cpp" />
+    <ClCompile Include="bgsegm.cpp" />
+    <ClCompile Include="calib3d.cpp" />
+    <ClCompile Include="core.cpp" />
+    <ClCompile Include="face.cpp" />
+    <ClCompile Include="features2d.cpp" />
+    <ClCompile Include="flann.cpp" />
+    <ClCompile Include="highgui.cpp" />
+    <ClCompile Include="imgcodecs.cpp" />
+    <ClCompile Include="imgproc.cpp" />
+    <ClCompile Include="img_hash.cpp" />
+    <ClCompile Include="ml.cpp" />
+    <ClCompile Include="my_functions.cpp" />
+    <ClCompile Include="objdetect.cpp" />
+    <ClCompile Include="optflow.cpp" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="photo.cpp" />
+    <ClCompile Include="shape.cpp" />
+    <ClCompile Include="std_string.cpp" />
+    <ClCompile Include="std_vector.cpp" />
+    <ClCompile Include="stitching.cpp" />
+    <ClCompile Include="tracking.cpp" />
+    <ClCompile Include="video.cpp" />
+    <ClCompile Include="videoio.cpp" />
+    <ClCompile Include="xfeatures2d.cpp" />
+    <ClCompile Include="ximgproc.cpp" />
+    <ClCompile Include="xphoto.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
