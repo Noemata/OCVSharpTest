@@ -18,6 +18,7 @@
 #include <opencv2/calib3d/calib3d_c.h>
 #include <opencv2/core/core_c.h>
 #include <opencv2/highgui/highgui_c.h>
+// MP! Added: To correctly support imShow under WinRT.
 #ifdef _WINRT_DLL
 #include <opencv2/highgui/highgui_winrt.hpp>
 #endif

@@ -515,7 +515,6 @@ namespace SDKTemplate
                 //    ContourApproximationModes.ApproxSimple);
 
 
-                // MP! was:
                 Cv2.FindContours(
                     edges,
                     out OpenCvSharp.Point[][] contours,
@@ -523,18 +522,6 @@ namespace SDKTemplate
                     (RetrievalModes)algorithm.algorithmProperties[0].CurrentValue,
                     (ContourApproximationModes)algorithm.algorithmProperties[1].CurrentValue,
                     (Point)algorithm.algorithmProperties[2].CurrentValue);
-
-                //RetrievalModes c1 = RetrievalModes.External;
-                //ContourApproximationModes c2 = ContourApproximationModes.ApproxSimple;
-                //Point pt = new Point(0, 0);
-
-                //Cv2.FindContours(
-                //    edges,
-                //    out OpenCvSharp.Point[][] contours,
-                //    out HierarchyIndex[] outputArray,
-                //    c1,
-                //    c2,
-                //    pt);
 
                 int maxLen = 0;
                 int maxIdx = -1;

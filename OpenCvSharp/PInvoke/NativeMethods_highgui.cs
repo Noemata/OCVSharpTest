@@ -61,6 +61,7 @@ namespace OpenCvSharp
         public static extern int highgui_createButton([MarshalAs(UnmanagedType.LPStr)] string barName, IntPtr onChange, IntPtr userdata, int type, int initialButtonState);
 
 #if WINRT
+        // MP! Added: To correctly support imShow under WinRT.
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl, BestFitMapping = false, ThrowOnUnmappableChar = true, ExactSpelling = true)]
         public static extern void highgui_initContainer([MarshalAs(UnmanagedType.IUnknown)] Object panel);
 #endif

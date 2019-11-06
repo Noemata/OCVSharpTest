@@ -14,6 +14,7 @@
 #ifdef _WIN32
 #include <Windows.h>
 
+// MP! Added: To provide WinRT version of MessageBox handling.
 #ifdef _WINRT_DLL
 void StringConvert(const std::string from, std::wstring& to);
 void StringConvert(const std::wstring from, std::string& to);

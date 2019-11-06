@@ -1,5 +1,6 @@
 #include "pch.h"
 
+// MP! Added: To provided WinRT alternative to MessageBox handling.
 void StringConvert(const std::string from, std::wstring& to)
 {
 	int num = MultiByteToWideChar(CP_UTF8, 0, from.c_str(), -1, NULL, 0);
