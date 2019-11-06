@@ -323,6 +323,8 @@ namespace OpenCvSharp
         }
 
 #if WINRT
+        // MP! Added: To correctly support imShow under WinRT.
+
         /// <summary>
         /// Initialize XAML container panel for use by ImShow
         /// </summary>
