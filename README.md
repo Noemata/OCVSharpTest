@@ -15,7 +15,7 @@ This dumb hack was made to the OpenCV cvdef.h header, not sure why adding _WIN32
 #endif
 ```
 
-Changed to a not so dumb hack in pch.h instead of above, so no need to change anything in OpenCV.  OpenCVSharp is also a drop in, no changes needed.
+Changed to a not so dumb hack in pch.h instead of above, so no need to change anything in OpenCV.  OpenCVSharp is also a drop in, no changes needed. (No longer true, very minor tweaks were needed, just look for MP! in code)
 
 ```
 #define CV_EXPORTS __declspec(dllexport)
