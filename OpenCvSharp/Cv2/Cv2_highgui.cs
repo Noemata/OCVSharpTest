@@ -323,6 +323,10 @@ namespace OpenCvSharp
         }
 
 #if WINRT
+        /// <summary>
+        /// Initialize XAML container panel for use by ImShow
+        /// </summary>
+        /// <param name="panel">Panel container.</param>
         public static void InitContainer(object panel)
         {
             NativeMethods.highgui_initContainer(panel);

@@ -60,9 +60,9 @@ namespace OpenCvSharp
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl, BestFitMapping = false, ThrowOnUnmappableChar = true, ExactSpelling = true)]
         public static extern int highgui_createButton([MarshalAs(UnmanagedType.LPStr)] string barName, IntPtr onChange, IntPtr userdata, int type, int initialButtonState);
 
+#if WINRT
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl, BestFitMapping = false, ThrowOnUnmappableChar = true, ExactSpelling = true)]
-        //public static extern void highgui_initContainer(IntPtr panel);
-        //public static extern void highgui_initContainer([MarshalAs(UnmanagedType.LPStruct)] object panel);
         public static extern void highgui_initContainer([MarshalAs(UnmanagedType.IUnknown)] Object panel);
+#endif
     }
 }
