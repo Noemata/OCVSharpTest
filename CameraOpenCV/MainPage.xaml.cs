@@ -47,12 +47,13 @@ namespace SDKTemplate
         public MainPage()
         {
             this.InitializeComponent();
-            App.container = this.StatusPanel;
 
             // This is a static public property that allows downstream pages to get a handle to the MainPage instance
             // in order to call methods that are in this class.
             Current = this;
             SampleTitle.Text = FEATURE_NAME;
+
+            App.container = this.cvContainer;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -78,7 +79,7 @@ namespace SDKTemplate
         private void ScenarioControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // Clear the status block when navigating scenarios.
-            NotifyUser(String.Empty, NotifyType.StatusMessage);
+            NotifyUser("Scanning ...", NotifyType.StatusMessage);
 
             ListBox scenarioListBox = sender as ListBox;
             Scenario s = scenarioListBox.SelectedItem as Scenario;

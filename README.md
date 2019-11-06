@@ -43,3 +43,7 @@ Support for compiled headers should really be done something like this, except t
 
 4. Don't use this code in a production setting
 
+### Screenshot
+![Screenshot](https://github.com/Noemata/OCVSharpTest/raw/master/Screenshot.png)
+
+* The above shows the Microsoft CameraOpenCV sample converted to be entirely in C#.

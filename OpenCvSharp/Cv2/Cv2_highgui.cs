@@ -321,5 +321,12 @@ namespace OpenCvSharp
                 throw PInvokeHelper.CreateException(ex);
             }
         }
+
+#if WINRT
+        public static void InitContainer(object panel)
+        {
+            NativeMethods.highgui_initContainer(panel);
+        }
+#endif
     }
 }

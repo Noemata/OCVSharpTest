@@ -91,11 +91,17 @@ CVAPI(void) highgui_setTrackbarMin(const char *trackbarname, const char *winname
     cv::setTrackbarMin(trackbarname, winname, minval);
 }
 
-
 CVAPI(int) highgui_createButton(const char *bar_name, cv::ButtonCallback on_change,
     void* userdata, int type, int initial_button_state)
 {
     return cv::createButton(bar_name, on_change, userdata, type, initial_button_state != 0);
 }
+
+#ifdef _WINRT_DLL
+CVAPI(void) highgui_initContainer(::Windows::UI::Xaml::Controls::Panel^ panel)
+{
+	cv::winrt_initContainer(panel);
+}
+#endif
 
 #endif

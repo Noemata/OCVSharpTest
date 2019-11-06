@@ -574,6 +574,8 @@ namespace SDKTemplate
                     ////return Cv2.ContourArea(res);
                 }
 
+                Mat2SoftwareBitmap(mOutput, output);
+
                 // Must run on UI thread.  The winrt container also needs to be set.  OpenCvSharp doesn't expose this yet.  Crashes here because container is null.
                 if (App.dispatcher != null)
                 {
@@ -582,8 +584,6 @@ namespace SDKTemplate
                         Cv2.ImShow("Contours", mOutput);
                     });
                 }
-
-                Mat2SoftwareBitmap(mOutput, output);
             }
         }
 

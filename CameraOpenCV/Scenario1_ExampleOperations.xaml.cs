@@ -31,6 +31,8 @@ using System.Diagnostics;
 using Windows.Media.MediaProperties;
 using System.Collections.ObjectModel;
 
+using OpenCvSharp;
+
 namespace SDKTemplate
 {
     /// <summary>
@@ -130,6 +132,9 @@ namespace SDKTemplate
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
+            App.dispatcher = this.Dispatcher;
+            Cv2.InitContainer((object)App.container);
+            //_helper.SetContainer(App.container);
             rootPage = MainPage.Current;
 
             // setting up the combobox, and default operation
