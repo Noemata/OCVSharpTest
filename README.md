@@ -46,4 +46,6 @@ Support for compiled headers should really be done something like this, except t
 ### Screenshot
 ![Screenshot](https://github.com/Noemata/OCVSharpTest/raw/master/Screenshot.png)
 
-* The above shows the Microsoft CameraOpenCV sample converted to be entirely in C#.
+* The above shows the Microsoft CameraOpenCV sample converted to be entirely in C#.  This still needs a little more clean up.
+
+** Note, am 10 hours into the hack for UWP support in OpenCVSharp. It is now somewhat less hackish and fairly usable.  Hopefully the original author of OpenCVSharp can take it from here.
