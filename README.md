@@ -6,7 +6,7 @@ The original repo is located here: https://github.com/shimat/opencvsharp
 
 Surprisingly little tweaking was required to support UWP because of the exceptional work done by the author of OpenCVSharp and vcpkg.  This isn't a fork because it initially started as a hack with no expectation of success.  Hopefully the author of OpenCVSharp will do the integration back into the main repo.
 
-Most aspects of the code are working, at least everything tried so far, but there are still some rough edges in WinRT implementation details.  Also some parts of OpenCV are not available with vcpkg.
+Most aspects of the code are working, at least everything tried so far, but there are still some rough edges in WinRT implementation details.  Also some parts of OpenCV are not available with vcpkg UWP builds.
 
 If you do fix the remaining issues, please leave a note in the issues section here.
 

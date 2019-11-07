@@ -430,10 +430,15 @@ namespace SDKTemplate
 
     public sealed class OpenCVHelper
     {
+        BackgroundSubtractorMOG2 mog2 = BackgroundSubtractorMOG2.Create();
 
         public OpenCVHelper()
         {
+        }
 
+        ~OpenCVHelper()
+        {
+            mog2.Dispose();
         }
 
         public void Blur(SoftwareBitmap input, SoftwareBitmap output, Algorithm algorithm)
@@ -448,6 +453,14 @@ namespace SDKTemplate
                     (BorderTypes)algorithm.algorithmProperties[2].CurrentValue);
                 //Cv2.ImShow("Blur", mOutput);
                 Mat2SoftwareBitmap(mOutput, output);
+            }
+        }
+
+        public void Histogram(SoftwareBitmap input, SoftwareBitmap output, Algorithm algorithm)
+        {
+            if (algorithm.AlgorithmName == "Histogram")
+            {
+
             }
         }
 
@@ -580,13 +593,37 @@ namespace SDKTemplate
             {
                 Mat mInput = SoftwareBitmap2Mat(input);
                 Mat mOutput = new Mat(mInput.Rows, mInput.Cols, MatType.CV_8UC4);
-                mInput.CopyTo(mOutput);
-                Mat gray = mInput.CvtColor(ColorConversionCodes.BGRA2GRAY);
-                Mat edges = gray.Canny((double)algorithm.algorithmProperties[0].CurrentValue,
-                    (double)algorithm.algorithmProperties[1].CurrentValue,
-                    /*apertureSize*/(int)algorithm.algorithmProperties[2].CurrentValue);
+                Mat intermediate = new Mat(mInput.Rows, mInput.Cols, MatType.CV_8UC4);
 
-                Cv2.ImShow("edges", edges);
+                Cv2.Canny(mInput, intermediate, 80, 90);
+                Cv2.CvtColor(intermediate, mOutput, ColorConversionCodes.GRAY2BGRA);
+
+
+                //mInput.CopyTo(mOutput);
+                //Mat gray = mInput.CvtColor(ColorConversionCodes.BGRA2GRAY);
+                //Mat edges = gray.Canny((double)algorithm.algorithmProperties[0].CurrentValue,
+                //    (double)algorithm.algorithmProperties[1].CurrentValue,
+                //    /*apertureSize*/(int)algorithm.algorithmProperties[2].CurrentValue);
+
+                Mat2SoftwareBitmap(mOutput, output);
+            }
+        }
+
+        public void MotionDetector(SoftwareBitmap input, SoftwareBitmap output, Algorithm algorithm)
+        {
+            if (algorithm.AlgorithmName == "MotionDetector")
+            {
+                Mat mInput = SoftwareBitmap2Mat(input);
+                Mat mOutput = new Mat(mInput.Rows, mInput.Cols, MatType.CV_8UC4);
+                Mat fgMaskMOG2 = new Mat(mInput.Rows, mInput.Cols, MatType.CV_8UC4);
+                Mat temp = new Mat(mInput.Rows, mInput.Cols, MatType.CV_8UC4);
+
+                mog2.Apply(mInput, fgMaskMOG2);
+                Cv2.CvtColor(fgMaskMOG2, temp, ColorConversionCodes.GRAY2BGRA);
+
+                Mat element = Cv2.GetStructuringElement(MorphShapes.Rect, new Size(3, 3));
+                Cv2.Erode(temp, temp, element);
+                temp.CopyTo(mOutput);
                 Mat2SoftwareBitmap(mOutput, output);
             }
         }

@@ -81,7 +81,6 @@ namespace SDKTemplate
             },
             new Algorithm()
             {
-
                 AlgorithmName ="Canny",
                 algorithmProperties = new List<AlgorithmProperty>()
                 {
@@ -92,7 +91,14 @@ namespace SDKTemplate
             },
             new Algorithm()
             {
-
+                AlgorithmName ="Histogram",
+                algorithmProperties = new List<AlgorithmProperty>()
+                {
+                    new AlgorithmProperty(0,typeof(double),"threshold1")
+                }
+            },
+            new Algorithm()
+            {
                 AlgorithmName ="MotionDetector",
                 algorithmProperties = new List<AlgorithmProperty>()
                 {

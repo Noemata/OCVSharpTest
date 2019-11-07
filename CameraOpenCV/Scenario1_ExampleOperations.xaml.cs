@@ -67,6 +67,7 @@ namespace SDKTemplate
             Blur = 0,
             HoughLines,
             Contours,
+            Canny,
             Histogram,
             MotionDetector
         }
@@ -220,12 +221,13 @@ namespace SDKTemplate
                     {
                         _helper.Contours(originalBitmap, outputBitmap, _storeditem);
                     }
-                    else if (currentOperation == OperationType.Histogram)
+                    else if (currentOperation == OperationType.Canny)
                     {
-                        //_helper.Canny(originalBitmap, outputBitmap, _storeditem);
+                        _helper.Canny(originalBitmap, outputBitmap, _storeditem);
                     }
                     else if (currentOperation == OperationType.MotionDetector)
                     {
+                        _helper.MotionDetector(originalBitmap, outputBitmap, _storeditem);
                     }
 
                     // Display both the original bitmap and the processed bitmap.
@@ -242,6 +244,11 @@ namespace SDKTemplate
             //UpdateAlgorithm(_storeditem);
             currentOperation = (OperationType)((sender as ComboBox).SelectedItem);
 
+            if (OperationType.Contours != currentOperation)
+                App.container.Visibility = Visibility.Collapsed;
+            else
+                App.container.Visibility = Visibility.Visible;
+
             if (OperationType.Blur == currentOperation)
             {
                 this.CurrentOperationTextBlock.Text = "Current: Blur";
@@ -257,6 +264,10 @@ namespace SDKTemplate
             else if (OperationType.HoughLines == currentOperation)
             {
                 this.CurrentOperationTextBlock.Text = "Current: Line detection";
+            }
+            else if (OperationType.Canny == currentOperation)
+            {
+                this.CurrentOperationTextBlock.Text = "Current: Canny";
             }
             else if (OperationType.MotionDetector == currentOperation)
             {
@@ -369,6 +380,10 @@ namespace SDKTemplate
                 _storeditem.updateCurrentValue(algorithmProperty);
             }
             else if (OperationType.HoughLines == currentOperation)
+            {
+                _storeditem.updateCurrentValue(algorithmProperty);
+            }
+            else if (OperationType.Canny == currentOperation)
             {
                 _storeditem.updateCurrentValue(algorithmProperty);
             }
