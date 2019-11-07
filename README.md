@@ -1,4 +1,4 @@
-## UWP OpenCVSharp Sample (not fully working)
+## UWP OpenCVSharp Lib and Sample
 
 This is a quickish adaptation of OpenCVSharp (17 hours worth in the midst of other tasks) to see how easily it can be made to work with OpenCV v4.1.1 under UWP.
 
