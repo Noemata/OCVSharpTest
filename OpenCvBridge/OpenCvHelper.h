@@ -8,7 +8,7 @@
 // PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
 //
 //*********************************************************
-// OpenCVHelper.h
+// OpenCvHelper.h
 
 #pragma once
 #include <opencv2\core\core.hpp>
@@ -16,8 +16,6 @@
 #include <opencv2\video.hpp>
 #include <opencv2\imgproc\types_c.h>
 #include <opencv2\imgproc\imgproc_c.h>
-#include <opencv2\highgui.hpp>
-#include <opencv2\highgui\highgui_winrt.hpp>
 
 namespace OpenCvBridge
 {
@@ -42,7 +40,6 @@ namespace OpenCvBridge
         void MotionDetector(
             Windows::Graphics::Imaging::SoftwareBitmap^ input,
             Windows::Graphics::Imaging::SoftwareBitmap^ output);
-
 
 	private:
         // used only for the background subtraction operation
