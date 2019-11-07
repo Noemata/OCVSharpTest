@@ -447,20 +447,15 @@ namespace SDKTemplate
             {
                 Mat mInput = SoftwareBitmap2Mat(input);
                 Mat mOutput = new Mat(mInput.Rows, mInput.Cols, MatType.CV_8UC4);
+
+                //App.CvHelper.T
+
                 Cv2.Blur(mInput, mOutput,
                     (Size)algorithm.algorithmProperties[0].CurrentValue,
                     (Point)algorithm.algorithmProperties[1].CurrentValue,
                     (BorderTypes)algorithm.algorithmProperties[2].CurrentValue);
                 //Cv2.ImShow("Blur", mOutput);
                 Mat2SoftwareBitmap(mOutput, output);
-            }
-        }
-
-        public void Histogram(SoftwareBitmap input, SoftwareBitmap output, Algorithm algorithm)
-        {
-            if (algorithm.AlgorithmName == "Histogram")
-            {
-
             }
         }
 

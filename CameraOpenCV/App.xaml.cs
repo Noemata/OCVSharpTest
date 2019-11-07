@@ -15,6 +15,8 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
+using OpenCvBridge;
+
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=402347&clcid=0x409
 
 namespace SDKTemplate
@@ -24,13 +26,14 @@ namespace SDKTemplate
     /// </summary>
     sealed partial class App : Application
     {
+        static public Windows.UI.Core.CoreDispatcher dispatcher = null;
+        static public Panel container = null;
+        static public OpenCvHelper CvHelper = new OpenCvHelper();
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
-        static public Windows.UI.Core.CoreDispatcher dispatcher = null;
-        static public Panel container = null;
-
         public App()
         {
             this.InitializeComponent();

@@ -42,7 +42,9 @@ namespace OpenCvBridge
         void MotionDetector(
             Windows::Graphics::Imaging::SoftwareBitmap^ input,
             Windows::Graphics::Imaging::SoftwareBitmap^ output);
-    private:
+
+
+	private:
         // used only for the background subtraction operation
         cv::Mat fgMaskMOG2;
         cv::Ptr<cv::BackgroundSubtractor> pMOG2;
@@ -51,6 +53,6 @@ namespace OpenCvBridge
         bool GetPointerToPixelData(Windows::Graphics::Imaging::SoftwareBitmap^ bitmap,
             unsigned char** pPixelData, unsigned int* capacity);
 
-        bool TryConvert(Windows::Graphics::Imaging::SoftwareBitmap^ from, cv::Mat& convertedMat);
-    };
+		bool TryConvert(Windows::Graphics::Imaging::SoftwareBitmap^ from, cv::Mat& convertedMat);
+	};
 }

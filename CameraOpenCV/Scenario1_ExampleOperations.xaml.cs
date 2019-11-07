@@ -32,8 +32,6 @@ using Windows.Media.MediaProperties;
 using System.Collections.ObjectModel;
 
 using OpenCvSharp;
-using OpenCvBridge;
-
 
 namespace SDKTemplate
 {
@@ -59,8 +57,6 @@ namespace SDKTemplate
         private const int IMAGE_COLS = 640;
 
         private OCVOp _op = new OCVOp();
-        private OpenCvHelper _helper = new OpenCvHelper();
-
 
         private DispatcherTimer _FPSTimer = null;
 
@@ -231,7 +227,7 @@ namespace SDKTemplate
                     }
                     else if (currentOperation == OperationType.Histogram)
                     {
-                        _helper.Histogram(originalBitmap, outputBitmap);
+                        App.CvHelper.Histogram(originalBitmap, outputBitmap);
                     }
 
                     // Display both the original bitmap and the processed bitmap.
