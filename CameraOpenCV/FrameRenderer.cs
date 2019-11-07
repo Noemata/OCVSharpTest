@@ -515,14 +515,6 @@ namespace SDKTemplate
                 Mat gray = mInput.CvtColor(ColorConversionCodes.BGRA2GRAY);
                 Mat edges = gray.Canny((double)algorithm.algorithmProperties[6].CurrentValue, (double)algorithm.algorithmProperties[7].CurrentValue);
 
-                //Cv2.FindContours(
-                //    edges,
-                //    out OpenCvSharp.Point[][] contours,
-                //    out HierarchyIndex[] outputArray,
-                //    RetrievalModes.Tree,
-                //    ContourApproximationModes.ApproxSimple);
-
-
                 Cv2.FindContours(
                     edges,
                     out OpenCvSharp.Point[][] contours,
@@ -590,15 +582,9 @@ namespace SDKTemplate
                 Mat mOutput = new Mat(mInput.Rows, mInput.Cols, MatType.CV_8UC4);
                 Mat intermediate = new Mat(mInput.Rows, mInput.Cols, MatType.CV_8UC4);
 
+                // MP! Todo: add param support
                 Cv2.Canny(mInput, intermediate, 80, 90);
                 Cv2.CvtColor(intermediate, mOutput, ColorConversionCodes.GRAY2BGRA);
-
-
-                //mInput.CopyTo(mOutput);
-                //Mat gray = mInput.CvtColor(ColorConversionCodes.BGRA2GRAY);
-                //Mat edges = gray.Canny((double)algorithm.algorithmProperties[0].CurrentValue,
-                //    (double)algorithm.algorithmProperties[1].CurrentValue,
-                //    /*apertureSize*/(int)algorithm.algorithmProperties[2].CurrentValue);
 
                 Mat2SoftwareBitmap(mOutput, output);
             }
@@ -613,6 +599,7 @@ namespace SDKTemplate
                 Mat fgMaskMOG2 = new Mat(mInput.Rows, mInput.Cols, MatType.CV_8UC4);
                 Mat temp = new Mat(mInput.Rows, mInput.Cols, MatType.CV_8UC4);
 
+                // MP! Todo: add param support
                 mog2.Apply(mInput, fgMaskMOG2);
                 Cv2.CvtColor(fgMaskMOG2, temp, ColorConversionCodes.GRAY2BGRA);
 
