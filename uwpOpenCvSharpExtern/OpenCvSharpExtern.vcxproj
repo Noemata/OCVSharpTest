@@ -244,6 +244,10 @@
     <ClInclude Include="core_RNG.h" />
     <ClInclude Include="core_SparseMat.h" />
     <ClInclude Include="core_SVD.h" />
+    <ClInclude Include="cuda.h" />
+    <ClInclude Include="cuda_GpuMat.h" />
+    <ClInclude Include="dnn.h" />
+    <ClInclude Include="dnn_Net.h" />
     <ClInclude Include="face_BasicFaceRecognizer.h" />
     <ClInclude Include="face_EigenFaceRecognizer.h" />
     <ClInclude Include="face_Facemark.h" />
@@ -296,11 +300,15 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="photo.h" />
     <ClInclude Include="photo_HDR.h" />
+    <ClInclude Include="quality.h" />
     <ClInclude Include="shape_ShapeDistanceExtractor.h" />
     <ClInclude Include="std_string.h" />
     <ClInclude Include="std_vector.h" />
     <ClInclude Include="stitching.h" />
     <ClInclude Include="stitching_detail_Matchers.h" />
+    <ClInclude Include="superres.h" />
+    <ClInclude Include="text.h" />
+    <ClInclude Include="text_TextDetector.h" />
     <ClInclude Include="tracking.h" />
     <ClInclude Include="tracking_MultiTracker.h" />
     <ClInclude Include="video.h" />
@@ -322,6 +330,8 @@
     <ClCompile Include="bgsegm.cpp" />
     <ClCompile Include="calib3d.cpp" />
     <ClCompile Include="core.cpp" />
+    <ClCompile Include="cuda.cpp" />
+    <ClCompile Include="dnn.cpp" />
     <ClCompile Include="face.cpp" />
     <ClCompile Include="features2d.cpp" />
     <ClCompile Include="flann.cpp" />
@@ -342,10 +352,13 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="photo.cpp" />
+    <ClCompile Include="quality.cpp" />
     <ClCompile Include="shape.cpp" />
     <ClCompile Include="std_string.cpp" />
     <ClCompile Include="std_vector.cpp" />
     <ClCompile Include="stitching.cpp" />
+    <ClCompile Include="superres.cpp" />
+    <ClCompile Include="text.cpp" />
     <ClCompile Include="tracking.cpp" />
     <ClCompile Include="video.cpp" />
     <ClCompile Include="videoio.cpp" />

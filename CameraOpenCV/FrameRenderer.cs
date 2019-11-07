@@ -563,10 +563,10 @@ namespace SDKTemplate
 
                 Mat2SoftwareBitmap(mOutput, output);
 
-                // Must run on UI thread.  The winrt container also needs to be set.  OpenCvSharp doesn't expose this yet.  Crashes here because container is null.
-                if (App.dispatcher != null)
+                // Must run on UI thread.  The winrt container also needs to be set.
+                if (App.container != null)
                 {
-                    await App.dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+                    await App.container.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                     {
                         Cv2.ImShow("Contours", mOutput);
                     });

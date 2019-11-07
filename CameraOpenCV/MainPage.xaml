@@ -65,7 +65,7 @@
                             <!-- Use LiveSetting to enable screen readers to announce the status update. -->
                             <TextBlock x:Name="StatusBlock" FontWeight="Bold" AutomationProperties.LiveSetting="Assertive"
                                    MaxWidth="{Binding ElementName=Splitter, Path=ActualWidth}" Margin="10,10,10,20" TextWrapping="Wrap"  />
-                            <ScrollViewer VerticalScrollMode="Auto"  VerticalScrollBarVisibility="Auto" MaxHeight="400" Margin="70,0,0,0">
+                            <ScrollViewer VerticalScrollMode="Auto"  VerticalScrollBarVisibility="Auto" MaxHeight="400" Margin="78,0,0,0">
                                 <StackPanel x:Name="cvContainer" Orientation="Vertical">
                                 </StackPanel>
                             </ScrollViewer>

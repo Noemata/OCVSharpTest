@@ -1,4 +1,4 @@
 // ReSharper disable CppUnusedIncludeDirective
 #include "pch.h"
-#include "cuda.h"
-#include "cuda_GpuMat.h"
+#include "dnn.h"
+#include "dnn_Net.h"
