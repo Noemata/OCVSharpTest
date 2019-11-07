@@ -39,10 +39,10 @@
                     <ToggleButton HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Center" Click="ToggleButton_Click">
                         <FontIcon x:Name="Setting" FontFamily="Segoe MDL2 Assets" Glyph="&#xE713;" Margin="0,0,0,0"/>
                     </ToggleButton>
-                    <Button x:Name="FileSaving" HorizontalAlignment="Left" Grid.Column="2" VerticalAlignment="Center" Click="ToggleButton_Click_1">
+                    <Button x:Name="FileSaving" HorizontalAlignment="Left" Grid.Column="2" VerticalAlignment="Center" Click="OnSave">
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE74E;" Margin="0,0,0,0"/>
                     </Button>
-                    <Button x:Name="FileOpen" HorizontalAlignment="Left" Grid.Column="3" VerticalAlignment="Center" Click="ToggleButton_Click_2">
+                    <Button x:Name="FileOpen" HorizontalAlignment="Left" Grid.Column="3" VerticalAlignment="Center" Click="OnOpen">
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE838;" Margin="0,0,0,0"/>
                     </Button>
                 </Grid>

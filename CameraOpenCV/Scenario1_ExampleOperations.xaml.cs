@@ -32,6 +32,8 @@ using Windows.Media.MediaProperties;
 using System.Collections.ObjectModel;
 
 using OpenCvSharp;
+using OpenCvBridge;
+
 
 namespace SDKTemplate
 {
@@ -56,9 +58,9 @@ namespace SDKTemplate
         private const int IMAGE_ROWS = 480;
         private const int IMAGE_COLS = 640;
 
-        private bool isSelectItem = false;
+        private OCVOp _op = new OCVOp();
+        private OpenCvHelper _helper = new OpenCvHelper();
 
-        private OpenCVHelper _helper = new OpenCVHelper();
 
         private DispatcherTimer _FPSTimer = null;
 
@@ -78,8 +80,6 @@ namespace SDKTemplate
             this.InitializeComponent();
             _previewRenderer = new FrameRenderer(PreviewImage);
             _outputRenderer = new FrameRenderer(OutputImage);
-
-            // _helper = new OpenCVHelper();
 
             _FPSTimer = new DispatcherTimer()
             {
@@ -211,23 +211,27 @@ namespace SDKTemplate
                     // Operate on the image in the manner chosen by the user.
                     if (currentOperation == OperationType.Blur)
                     {
-                        _helper.Blur(originalBitmap, outputBitmap, _storeditem);
+                        _op.Blur(originalBitmap, outputBitmap, _storeditem);
                     }
                     else if (currentOperation == OperationType.HoughLines)
                     {
-                        _helper.HoughLines(originalBitmap, outputBitmap, _storeditem);
+                        _op.HoughLines(originalBitmap, outputBitmap, _storeditem);
                     }
                     else if (currentOperation == OperationType.Contours)
                     {
-                        _helper.Contours(originalBitmap, outputBitmap, _storeditem);
+                        _op.Contours(originalBitmap, outputBitmap, _storeditem);
                     }
                     else if (currentOperation == OperationType.Canny)
                     {
-                        _helper.Canny(originalBitmap, outputBitmap, _storeditem);
+                        _op.Canny(originalBitmap, outputBitmap, _storeditem);
                     }
                     else if (currentOperation == OperationType.MotionDetector)
                     {
-                        _helper.MotionDetector(originalBitmap, outputBitmap, _storeditem);
+                        _op.MotionDetector(originalBitmap, outputBitmap, _storeditem);
+                    }
+                    else if (currentOperation == OperationType.Histogram)
+                    {
+                        _helper.Histogram(originalBitmap, outputBitmap);
                     }
 
                     // Display both the original bitmap and the processed bitmap.
@@ -463,38 +467,8 @@ namespace SDKTemplate
             });
         }
 
-        // Saving output Image
-        private async void ToggleButton_Click_1(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        // Open a Exist Image
-        private async void ToggleButton_Click_2(object sender, RoutedEventArgs e)
-        {
-
-            var picker = new Windows.Storage.Pickers.FileOpenPicker();
-            picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
-            picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.PicturesLibrary;
-            picker.FileTypeFilter.Add(".jpg");
-            picker.FileTypeFilter.Add(".jpeg");
-            picker.FileTypeFilter.Add(".png");
-
-            Windows.Storage.StorageFile file = await picker.PickSingleFileAsync();
-            //if (file != null)
-            //{
-            //    // Application now has read/write access to the picked file
-            //    this.textBlock.Text = "Picked photo: " + file.Name;
-            //}
-            //else
-            //{
-            //    this.textBlock.Text = "Operation cancelled.";
-            //}
-        }
-
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
         }
     }
 }

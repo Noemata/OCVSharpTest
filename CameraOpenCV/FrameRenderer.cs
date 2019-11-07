@@ -428,15 +428,15 @@ namespace SDKTemplate
     }
 
 
-    public sealed class OpenCVHelper
+    public sealed class OCVOp
     {
         BackgroundSubtractorMOG2 mog2 = BackgroundSubtractorMOG2.Create();
 
-        public OpenCVHelper()
+        public OCVOp()
         {
         }
 
-        ~OpenCVHelper()
+        ~OCVOp()
         {
             mog2.Dispose();
         }

@@ -186,6 +186,18 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OpenCvBridge\OpenCvBridge.vcxproj">
+      <Project>{62767b00-3cf0-4ac9-9ad7-37289abf7f80}</Project>
+      <Name>OpenCvBridge</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenCvSharp.Blob\OpenCvSharp.Blob.csproj">
+      <Project>{f43b9e94-a0d5-488e-b0e1-53958e5148bf}</Project>
+      <Name>OpenCvSharp.Blob</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenCvSharp.Extensions\OpenCvSharp.Extensions.csproj">
+      <Project>{de1a8c62-566f-4d1a-8e5a-81e0abeb12e0}</Project>
+      <Name>OpenCvSharp.Extensions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenCvSharp\OpenCvSharp.csproj">
       <Project>{ea866a58-d096-4626-bd22-6b462641f7d3}</Project>
       <Name>OpenCvSharp</Name>

@@ -53,9 +53,7 @@ namespace SDKTemplate
         private const int IMAGE_ROWS = 480;
         private const int IMAGE_COLS = 640;
 
-        private bool isSelectItem = false;
-
-        private OpenCVHelper _helper;
+        private OCVOp _helper;
 
         private DispatcherTimer _FPSTimer = null;
 
@@ -92,7 +90,7 @@ namespace SDKTemplate
             this.FPSMonitor.Text = "FPS: " + frameCount;
         }
 
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             rootPage = MainPage.Current;
 
@@ -101,13 +99,13 @@ namespace SDKTemplate
             OperationComboBox.SelectedIndex = 0;
             currentOperation = OperationType.Blur;
 
-            _helper = new OpenCVHelper();
+            _helper = new OCVOp();
             FileOpen.IsEnabled = true;
             FileSaving.IsEnabled = true;
             _FPSTimer.Start();
         }
 
-        protected override async void OnNavigatedFrom(NavigationEventArgs args)
+        protected override void OnNavigatedFrom(NavigationEventArgs args)
         {
             _FPSTimer.Stop();
         }
@@ -379,13 +377,12 @@ namespace SDKTemplate
         }
 
         // Saving output Image
-        private async void ToggleButton_Click_1(object sender, RoutedEventArgs e)
+        private async void OnSave(object sender, RoutedEventArgs e)
         {
-
         }
 
         // Open a Exist Image
-        private async void ToggleButton_Click_2(object sender, RoutedEventArgs e)
+        private async void OnOpen(object sender, RoutedEventArgs e)
         {
             FileOpen.IsEnabled = false;
             FileSaving.IsEnabled = false;
