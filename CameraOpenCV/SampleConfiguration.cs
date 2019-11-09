@@ -35,7 +35,7 @@ namespace SDKTemplate
             new Algorithm()
             {
                 AlgorithmName ="Blur",
-                algorithmProperties = new List<AlgorithmProperty>()
+                AlgorithmProperties = new List<AlgorithmProperty>()
                 {
                     //Cv2.Blur()
                     new AlgorithmProperty(0,typeof(Size),"Ksize","A Size object representing the size of the kernel.",480,1,5),
@@ -47,7 +47,7 @@ namespace SDKTemplate
             {
 
                 AlgorithmName ="HoughLines",
-                algorithmProperties = new List<AlgorithmProperty>()
+                AlgorithmProperties = new List<AlgorithmProperty>()
                 {
                     //Cv2.HoughLinesP()
                     //Cv2.Line()
@@ -66,7 +66,7 @@ namespace SDKTemplate
                 //Cv2.FindContours() 
                 //Cv2.DrawContours()
                 AlgorithmName ="Contours",
-                algorithmProperties = new List<AlgorithmProperty>()
+                AlgorithmProperties = new List<AlgorithmProperty>()
                 {
                     new AlgorithmProperty(0,typeof(RetrievalModes),"RetrievalModes","Contour retrieval mode.",4,0,0),
                     new AlgorithmProperty(1,typeof(ContourApproximationModes),"ContourApproximationModes","Contour approximation method",3,0,0),
@@ -82,7 +82,7 @@ namespace SDKTemplate
             new Algorithm()
             {
                 AlgorithmName ="Canny",
-                algorithmProperties = new List<AlgorithmProperty>()
+                AlgorithmProperties = new List<AlgorithmProperty>()
                 {
                     new AlgorithmProperty(0,typeof(double),"Threshold1","The first threshold for the hysteresis procedure.",255,0,50),
                     new AlgorithmProperty(1,typeof(double),"Threshold2","The second threshold for the hysteresis procedure.",255,0,200),
@@ -92,7 +92,7 @@ namespace SDKTemplate
             new Algorithm()
             {
                 AlgorithmName ="Histogram",
-                algorithmProperties = new List<AlgorithmProperty>()
+                AlgorithmProperties = new List<AlgorithmProperty>()
                 {
                     new AlgorithmProperty(0,typeof(double),"threshold1")
                 }
@@ -100,7 +100,7 @@ namespace SDKTemplate
             new Algorithm()
             {
                 AlgorithmName ="MotionDetector",
-                algorithmProperties = new List<AlgorithmProperty>()
+                AlgorithmProperties = new List<AlgorithmProperty>()
                 {
                     new AlgorithmProperty(0,typeof(double),"threshold1"),
                     new AlgorithmProperty(1,typeof(double),"threshold2"),

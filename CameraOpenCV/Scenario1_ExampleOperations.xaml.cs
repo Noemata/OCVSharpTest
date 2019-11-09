@@ -56,7 +56,7 @@ namespace SDKTemplate
         private const int IMAGE_ROWS = 480;
         private const int IMAGE_COLS = 640;
 
-        private OCVOp _op = new OCVOp();
+        private OcvOp _op = new OcvOp();
 
         private DispatcherTimer _FPSTimer = null;
 
@@ -227,7 +227,11 @@ namespace SDKTemplate
                     }
                     else if (currentOperation == OperationType.Histogram)
                     {
+#if USEOCVHERLPER
                         App.CvHelper.Histogram(originalBitmap, outputBitmap);
+#else
+                        // MP! Todo: Implement C# version in OcvOp.
+#endif
                     }
 
                     // Display both the original bitmap and the processed bitmap.
@@ -278,7 +282,7 @@ namespace SDKTemplate
                 this.CurrentOperationTextBlock.Text = string.Empty;
             }
 
-            rootPage.algorithms[OperationComboBox.SelectedIndex].resetEnable();
+            rootPage.algorithms[OperationComboBox.SelectedIndex].ResetEnable();
             _storeditem = rootPage.algorithms[OperationComboBox.SelectedIndex];
             await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
@@ -326,7 +330,6 @@ namespace SDKTemplate
 
         }
 
-
         private async void Collection_ItemClick(object sender, ItemClickEventArgs e)
         {
             // Get the collection item corresponding to the clicked item.
@@ -335,7 +338,7 @@ namespace SDKTemplate
             {
                 // Stash the clicked item for use later. We'll need it when we connect back from the detailpage.
                 _storedProperty = container.Content as AlgorithmProperty;
-                _storeditem.revertEnable(_storedProperty.ParameterName);
+                _storeditem.RevertEnable(_storedProperty.ParameterName);
                 await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                 {
                     collection.ItemsSource = Algorithm.GetObjects(_storeditem);
@@ -363,33 +366,33 @@ namespace SDKTemplate
             {
                 if (algorithmProperty.ParameterName == "Ksize")
                 {
-                    _storeditem.updateCurrentValue(algorithmProperty);
-                    _storeditem.updateProperty("Anchor", AlgorithmPropertyType.maxValue, algorithmProperty.CurrentDoubleValue);
+                    _storeditem.UpdateCurrentValue(algorithmProperty);
+                    _storeditem.UpdateProperty("Anchor", AlgorithmPropertyType.maxValue, algorithmProperty.CurrentDoubleValue);
                 }
                 else
                 {
-                    _storeditem.updateCurrentValue(algorithmProperty);
+                    _storeditem.UpdateCurrentValue(algorithmProperty);
                 }
             }
             else if (OperationType.Contours == currentOperation)
             {
-                _storeditem.updateCurrentValue(algorithmProperty);
+                _storeditem.UpdateCurrentValue(algorithmProperty);
             }
             else if (OperationType.Histogram == currentOperation)
             {
-                _storeditem.updateCurrentValue(algorithmProperty);
+                _storeditem.UpdateCurrentValue(algorithmProperty);
             }
             else if (OperationType.HoughLines == currentOperation)
             {
-                _storeditem.updateCurrentValue(algorithmProperty);
+                _storeditem.UpdateCurrentValue(algorithmProperty);
             }
             else if (OperationType.Canny == currentOperation)
             {
-                _storeditem.updateCurrentValue(algorithmProperty);
+                _storeditem.UpdateCurrentValue(algorithmProperty);
             }
             else if (OperationType.MotionDetector == currentOperation)
             {
-                _storeditem.updateCurrentValue(algorithmProperty);
+                _storeditem.UpdateCurrentValue(algorithmProperty);
             }
             else
             {
