@@ -64,11 +64,11 @@ namespace SDKTemplate
             }
         }
 
-        public void RevertEnable(string ParamName)
+        public void RevertEnable(string paramName)
         {
             foreach (var p in AlgorithmProperties)
             {
-                if (p.ParameterName == ParamName)
+                if (p.ParameterName == paramName)
                 {
                     if (p.IsComboBoxEnable)
                     {
@@ -101,17 +101,6 @@ namespace SDKTemplate
                     {
                         p.DetailsVisibility = Visibility.Visible;
                     }
-                    //if (algorithmProperties[i].IsEnable == false)
-                    //{
-                    //    algorithmProperties[i].IsEnable = true;
-                    //    algorithmProperties[i].isInitialize = false;
-                    //    algorithmProperties[i].SettingVisibility = Visibility.Visible; 
-                    //}
-                    //else
-                    //{
-                    //    algorithmProperties[i].IsEnable = false;
-                    //    algorithmProperties[i].SettingVisibility = Visibility.Collapsed;
-                    //}
                 }
             }
         }
@@ -127,11 +116,11 @@ namespace SDKTemplate
             }
         }
 
-        public object FindParamByName(string ParamName)
+        public object FindParamByName(string paramName)
         {
             foreach (var ap in AlgorithmProperties)
             {
-                if (ap.ParameterName == ParamName)
+                if (ap.ParameterName == paramName)
                 {
                     return ap.CurrentValue;
                 }

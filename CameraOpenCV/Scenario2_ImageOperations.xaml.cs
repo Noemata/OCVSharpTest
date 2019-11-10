@@ -1,31 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading;
+using System.Threading.Tasks;
 using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Windows.Graphics.Imaging;
+using Windows.Media;
+using Windows.Storage;
+using Windows.Storage.Pickers;
+using Windows.Storage.Streams;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-using System.Threading;
-using Windows.Graphics.Imaging;
-using Windows.Media.Capture.Frames;
-using Windows.Media.Capture;
-using System.Threading.Tasks;
-using System.Diagnostics;
-using Windows.Media.MediaProperties;
-using System.Collections.ObjectModel;
 using Windows.UI.Xaml.Media.Imaging;
-using Windows.Media;
-using Windows.Storage.Streams;
-using Windows.Storage;
-using Windows.Storage.Pickers;
-using Windows.UI.Popups;
+using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -36,30 +26,7 @@ namespace SDKTemplate
     /// </summary>
     public sealed partial class Scenario2_ImageOperations : Page
     {
-        private MainPage rootPage;
-
-        private FrameRenderer _previewRenderer = null;
-        private FrameRenderer _outputRenderer = null;
-
-        private Algorithm _storeditem { get; set; }
-        public AlgorithmProperty _storedProperty { get; set; }
-        public AlgorithmProperty _lastStoredProperty { get; set; }
-
-        private int _frameCount = 0;
-
-        // Synchronization
-        private SemaphoreSlim m_lock = new SemaphoreSlim(1);
-
-        private const int IMAGE_ROWS = 480;
-        private const int IMAGE_COLS = 640;
-
-        private OcvOp _helper;
-
-        private DispatcherTimer _FPSTimer = null;
-
-        private VideoFrame _cacheFrame=null;
-
-        enum OperationType
+        enum OperationType : int
         {
             Blur = 0,
             HoughLines,
@@ -67,27 +34,46 @@ namespace SDKTemplate
             Canny,
             MotionDetector
         }
-        OperationType currentOperation;
+
+        private const int ImageRows = 480;
+        private const int ImageCols = 640;
+
+        public AlgorithmProperty StoredProperty { get; set; }
+        public AlgorithmProperty LastStoredProperty { get; set; }
+
+        private MainPage rootPage;
+
+        private FrameRenderer previewRenderer;
+        private FrameRenderer outputRenderer;
+
+        private Algorithm storeditem;
+
+        private int frameCount = 0;
+
+        // Synchronization
+        private readonly SemaphoreSlim mLock = new SemaphoreSlim(1);
+        private OcvOp helper;
+        private DispatcherTimer fpsTimer;
+        private VideoFrame cacheFrame;
+        private OperationType currentOperation;
 
         public Scenario2_ImageOperations()
         {
             this.InitializeComponent();
-            _previewRenderer = new FrameRenderer(PreviewImage);
-            _outputRenderer = new FrameRenderer(OutputImage);
+            previewRenderer = new FrameRenderer(PreviewImage);
+            outputRenderer = new FrameRenderer(OutputImage);
 
-            // _helper = new OpenCVHelper();
-
-            _FPSTimer = new DispatcherTimer()
+            fpsTimer = new DispatcherTimer()
             {
                 Interval = TimeSpan.FromSeconds(1)
             };
-            _FPSTimer.Tick += UpdateFPS;
+            fpsTimer.Tick += UpdateFps;
         }
 
-        private void UpdateFPS(object sender, object e)
+        private void UpdateFps(object sender, object e)
         {
-            var frameCount = Interlocked.Exchange(ref _frameCount, 0);
-            this.FPSMonitor.Text = "FPS: " + frameCount;
+            var fc = Interlocked.Exchange(ref frameCount, 0);
+            this.FPSMonitor.Text = "FPS: " + fc;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -96,18 +82,17 @@ namespace SDKTemplate
 
             // setting up the combobox, and default operation
             OperationComboBox.ItemsSource = Enum.GetValues(typeof(OperationType));
-            OperationComboBox.SelectedIndex = 0;
-            currentOperation = OperationType.Blur;
+            OperationComboBox.SelectedIndex = (int)OperationType.Blur;
 
-            _helper = new OcvOp();
+            helper = new OcvOp();
             FileOpen.IsEnabled = true;
             FileSaving.IsEnabled = true;
-            _FPSTimer.Start();
+            fpsTimer.Start();
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs args)
         {
-            _FPSTimer.Stop();
+            fpsTimer.Stop();
         }
 
         /// <summary>
@@ -132,26 +117,27 @@ namespace SDKTemplate
                         // Operate on the image in the manner chosen by the user.
                         if (currentOperation == OperationType.Blur)
                         {
-                            _helper.Blur(originalBitmap, outputBitmap, _storeditem);
+                            helper.Blur(originalBitmap, outputBitmap, storeditem);
                         }
                         else if (currentOperation == OperationType.HoughLines)
                         {
-                            _helper.HoughLines(originalBitmap, outputBitmap, _storeditem);
+                            helper.HoughLines(originalBitmap, outputBitmap, storeditem);
                         }
                         else if (currentOperation == OperationType.Contours)
                         {
-                            _helper.Contours(originalBitmap, outputBitmap, _storeditem);
+                            helper.Contours(originalBitmap, outputBitmap, storeditem);
                         }
                         else if (currentOperation == OperationType.Canny)
                         {
-                            _helper.Canny(originalBitmap, outputBitmap, _storeditem);
+                            helper.Canny(originalBitmap, outputBitmap, storeditem);
                         }
                         else if (currentOperation == OperationType.MotionDetector)
                         {
                         }
+
                         // Display both the original bitmap and the processed bitmap.
-                        _previewRenderer.RenderFrame(originalBitmap);
-                        _outputRenderer.RenderFrame(outputBitmap);
+                        previewRenderer.RenderFrame(originalBitmap);
+                        outputRenderer.RenderFrame(outputBitmap);
                     }
                     catch (Exception ex)
                     {
@@ -159,12 +145,18 @@ namespace SDKTemplate
                     }
                 }
 
-                Interlocked.Increment(ref _frameCount);
+                Interlocked.Increment(ref frameCount);
             }
         }
 
-        private async void OperationComboBox_SelectionChanged(object sender, RoutedEventArgs e)
+        private async void OnOpComboBoxSelectionChanged(object sender, RoutedEventArgs e)
         {
+            ComboBox comboBox = sender as ComboBox;
+
+            // Process ComboBox selection when first loaded or when selection has changed from the current.
+            if (comboBox != null && comboBox.IsLoaded == true && (int)currentOperation == comboBox.SelectedIndex)
+                return;
+
             //UpdateAlgorithm(_storeditem);
             currentOperation = (OperationType)((sender as ComboBox).SelectedItem);
 
@@ -194,67 +186,58 @@ namespace SDKTemplate
             }
 
             rootPage.algorithms[OperationComboBox.SelectedIndex].ResetEnable();
-            _storeditem = rootPage.algorithms[OperationComboBox.SelectedIndex];
+            storeditem = rootPage.algorithms[OperationComboBox.SelectedIndex];
+
             await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
-                collection.ItemsSource = Algorithm.GetObjects(_storeditem);
+                collection.ItemsSource = Algorithm.GetObjects(storeditem);
             });
+
+            if (cacheFrame != null)
+                await ProcessWithOpenCV(cacheFrame);
         }
 
-
-
-        private async void Slider1_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        private async void OnSliderValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
-            if (_storeditem != null && _storedProperty != null)
+            var slider = sender as Slider;
+
+            if (storeditem != null && StoredProperty != null)
             {
-                if (_storedProperty.isInitialize)
+                if (StoredProperty.isInitialize)
                 {
-                    var res = sender as Slider;
-                    if (res.Tag?.ToString() != _storedProperty.ParameterName) return;
-                    _storedProperty.CurrentValue = res.Value;
-                    UpdateStoredAlgorithm(currentOperation, _storedProperty);
-                    if (_cacheFrame != null) await ProcessWithOpenCV(_cacheFrame);
+                    if (slider.Tag?.ToString() != StoredProperty.ParameterName) return;
+                    if (slider.Value >= StoredProperty.MinValue && slider.Value <= StoredProperty.MaxValue )
+                    {
+                        StoredProperty.CurrentValue = slider.Value;
+                        UpdateStoredAlgorithm(currentOperation, StoredProperty);
+                        if (cacheFrame != null) await ProcessWithOpenCV(cacheFrame);
+                    }
                 }
                 else
                 {
                     await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                     {
                         // initialize slider
-                        collection.ItemsSource = Algorithm.GetObjects(_storeditem);
-                        _storedProperty.isInitialize = true;
+                        collection.ItemsSource = Algorithm.GetObjects(storeditem);
+                        StoredProperty.isInitialize = true;
                     });
                 }
             }
         }
 
-        private void Slider1_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
-        {
-
-        }
-
-        private void Slider2_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
-        {
-
-        }
-
-        private void Slider3_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
-        {
-
-        }
-
-
-        private async void Collection_ItemClick(object sender, ItemClickEventArgs e)
+        private async void OnCollectionItemClick(object sender, ItemClickEventArgs e)
         {
             // Get the collection item corresponding to the clicked item.
             var container = collection.ContainerFromItem(e.ClickedItem) as ListViewItem;
+
             if (container != null)
             {
                 // Stash the clicked item for use later. We'll need it when we connect back from the detailpage.
-                _storedProperty = container.Content as AlgorithmProperty;
-                _storeditem.RevertEnable(_storedProperty.ParameterName);
+                StoredProperty = container.Content as AlgorithmProperty;
+                storeditem.RevertEnable(StoredProperty.ParameterName);
                 await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                 {
-                    collection.ItemsSource = Algorithm.GetObjects(_storeditem);
+                    collection.ItemsSource = Algorithm.GetObjects(storeditem);
                 });
             }
         }
@@ -279,32 +262,29 @@ namespace SDKTemplate
             {
                 if (algorithmProperty.ParameterName == "Ksize")
                 {
-                    _storeditem.UpdateCurrentValue(algorithmProperty);
-                    _storeditem.UpdateProperty("Anchor", AlgorithmPropertyType.maxValue, algorithmProperty.CurrentDoubleValue);
+                    storeditem.UpdateCurrentValue(algorithmProperty);
+                    storeditem.UpdateProperty("Anchor", AlgorithmPropertyType.maxValue, algorithmProperty.CurrentDoubleValue);
                 }
                 else
                 {
-                    _storeditem.UpdateCurrentValue(algorithmProperty);
+                    storeditem.UpdateCurrentValue(algorithmProperty);
                 }
             }
             else if (OperationType.Contours == currentOperation)
             {
-                _storeditem.UpdateCurrentValue(algorithmProperty);
+                storeditem.UpdateCurrentValue(algorithmProperty);
             }
             else if (OperationType.Canny == currentOperation)
             {
-                _storeditem.UpdateCurrentValue(algorithmProperty);
+                storeditem.UpdateCurrentValue(algorithmProperty);
             }
             else if (OperationType.HoughLines == currentOperation)
             {
-                _storeditem.UpdateCurrentValue(algorithmProperty);
+                storeditem.UpdateCurrentValue(algorithmProperty);
             }
             else if (OperationType.MotionDetector == currentOperation)
             {
-                _storeditem.UpdateCurrentValue(algorithmProperty);
-            }
-            else
-            {
+                storeditem.UpdateCurrentValue(algorithmProperty);
             }
         }
 
@@ -355,23 +335,7 @@ namespace SDKTemplate
                 {
                     Setting.Glyph = "\uE713";
                     SettingPanel.Visibility = Visibility.Collapsed;
-                    //Slider1.Visibility = Visibility.Collapsed;
                 }
-            });
-        }
-
-        private async void Collection_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
-            {
-                //if(collection.SelectedIndex!=-1)
-                //{
-                //    //int marginVal = collection.SelectedIndex * ((int)collection.ActualHeight / _storeditem.algorithmProperties.Count);
-                //    int marginVal = collection.SelectedIndex * 200;
-                //    SliderGrid.Margin = new Thickness(0, 120 + marginVal, 0, 0);
-                //}
-                //Slider1.Visibility = Visibility.Visible;
-                //curValue.Visibility = Visibility.Visible;
             });
         }
 
@@ -386,18 +350,17 @@ namespace SDKTemplate
             FileOpen.IsEnabled = false;
             FileSaving.IsEnabled = false;
 
-            await m_lock.WaitAsync();
+            await mLock.WaitAsync();
 
             try
             {
-                _cacheFrame = await LoadVideoFrameFromFilePickedAsync();
-                if (_cacheFrame != null)
+                cacheFrame = await LoadVideoFrameFromFilePickedAsync();
+                if (cacheFrame != null)
                 {
                     SoftwareBitmapSource source = new SoftwareBitmapSource();
-                    await source.SetBitmapAsync(_cacheFrame.SoftwareBitmap);
+                    await source.SetBitmapAsync(cacheFrame.SoftwareBitmap);
                     PreviewImage.Source = source;
-                    UIImageViewer_SizeChanged(null, null);
-                    await ProcessWithOpenCV(_cacheFrame);
+                    await ProcessWithOpenCV(cacheFrame);
                 }
             }
             catch (Exception ex)
@@ -405,30 +368,11 @@ namespace SDKTemplate
                 await (new MessageDialog(ex.Message)).ShowAsync();
             }
 
-            m_lock.Release();
+            mLock.Release();
 
             FileOpen.IsEnabled = true;
             FileSaving.IsEnabled = true;
         }
-
-        /// <summary>
-        /// Triggers when the image control is resized, makes sure the canvas size stays in sync with the frame display control.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void UIImageViewer_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            if (PreviewImage.Visibility == Visibility.Visible) // we are using an image file that we stretch, match UI control dimension
-            {
-                //PreviewFrameCanvas.Width = PreviewFrame.ActualWidth;
-                //PreviewFrameCanvas.Height = PreviewFrame.ActualHeight;
-            }
-            else // we are using a camera preview, make sure the aspect ratio is honored when rendering the face rectangle
-            {
-
-            }
-        }
-
 
         /// <summary>
         /// Launch file picker for user to select a picture file and return a VideoFrame
@@ -473,26 +417,26 @@ namespace SDKTemplate
             });
         }
 
-        private async void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void OnComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (_storeditem != null && _storedProperty != null)
+            if (storeditem != null && StoredProperty != null)
             {
-                if (_storedProperty.isInitialize)
+                if (StoredProperty.isInitialize)
                 {
                     var combo = sender as ComboBox;
                     var selectIdx = combo.SelectedIndex;
-                    if (combo.Tag?.ToString() != _storedProperty.ParameterName) return;
-                    _storedProperty.CurrentValue = (double)selectIdx;
-                    UpdateStoredAlgorithm(currentOperation, _storedProperty);
-                    if (_cacheFrame != null) await ProcessWithOpenCV(_cacheFrame);
+                    if (combo.Tag?.ToString() != StoredProperty.ParameterName) return;
+                    StoredProperty.CurrentValue = (double)selectIdx;
+                    UpdateStoredAlgorithm(currentOperation, StoredProperty);
+                    if (cacheFrame != null) await ProcessWithOpenCV(cacheFrame);
                 }
                 else
                 {
                     await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                     {
                         // initialize slider
-                        collection.ItemsSource = Algorithm.GetObjects(_storeditem);
-                        _storedProperty.isInitialize = true;
+                        collection.ItemsSource = Algorithm.GetObjects(storeditem);
+                        StoredProperty.isInitialize = true;
                     });
                 }
             }

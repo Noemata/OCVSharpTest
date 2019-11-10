@@ -10,19 +10,14 @@ namespace SDKTemplate
 {
     public class AlgorithmProperty : INotifyPropertyChanged
     {
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         // This method is called by the Set accessor of each property.
         // The CallerMemberName attribute that is applied to the optional propertyName
         // parameter causes the property name of the caller to be substituted as an argument.
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-            //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         // Name of the parameter.
@@ -84,6 +79,7 @@ namespace SDKTemplate
                 NotifyPropertyChanged("DetailsVisibility");
             }
         }
+
         // Current value of the parameter
         private double currentValue;
         public object CurrentValue
@@ -105,74 +101,23 @@ namespace SDKTemplate
                     var res = new OpenCvSharp.Size((int)currentValue, (int)currentValue);
                     return res;
                 }
-                //else if (ParamType == typeof(LineTypes))
-                //{
-                //    if ((int)currentValue == 0)
-                //    {
-                //        return LineTypes.Link4;
-                //    }
-                //    else if ((int)currentValue == 1)
-                //    {
-                //        return LineTypes.Link8;
-                //    }
-                //    else if ((int)currentValue == 2)
-                //    {
-                //        return LineTypes.AntiAlias;
-                //    }
-                //    else
-                //    {
-                //        return LineTypes.Link4;
-                //    }
-                //}
-                //else if (ParamType == typeof(BorderTypes))
-                //{
-                //    if ((int)currentValue == 0)
-                //    {
-                //        return BorderTypes.Constant;
-                //    }
-                //    else if ((int)currentValue == 1)
-                //    {
-                //        return BorderTypes.Replicate;
-                //    }
-                //    else if ((int)currentValue == 2)
-                //    {
-                //        return BorderTypes.Reflect;
-                //    }
-                //    else if ((int)currentValue == 3)
-                //    {
-                //        return BorderTypes.Wrap;
-                //    }
-                //    else if ((int)currentValue == 4)
-                //    {
-                //        return BorderTypes.Reflect101;
-                //    }
-                //    else if ((int)currentValue == 5)
-                //    {
-                //        return BorderTypes.Transparent;
-                //    }
-                //    else if ((int)currentValue == 6)
-                //    {
-                //        return BorderTypes.Isolated;
-                //    }
-                //    else
-                //    {
-                //        return BorderTypes.Default;
-                //    }
-                //}
 
                 if (ParamType == typeof(Scalar))
                 {
                     return (Scalar)currentValue;
                 }
+
                 if (ParamType == typeof(OpenCvSharp.Point))
                 {
                     var res = new OpenCvSharp.Point(currentValue, currentValue);
                     return res;
                 }
+
                 if (ParamType?.BaseType == typeof(Enum))
                 {
                     return ParamList[CurrentIntValue];
                 }
+
                 return currentValue;
             }
             set
@@ -180,6 +125,7 @@ namespace SDKTemplate
                 currentValue = (double)value;
                 CurrentDoubleValue = (double)value;
                 CurrentStringValue = CurrentValue.ToString();
+
                 if (ParamType?.BaseType == typeof(Enum))
                 {
                     CurrentIntValue = Convert.ToInt32(value);
@@ -188,6 +134,7 @@ namespace SDKTemplate
                 {
                     CurrentIntValue = 0;
                 }
+
                 NotifyPropertyChanged("CurrentValue");
             }
         }
@@ -280,7 +227,6 @@ namespace SDKTemplate
             }
         }
 
-
         private string tag;
         public string Tag
         {
@@ -339,6 +285,7 @@ namespace SDKTemplate
             MinValue = min;
             CurrentValue = cur > max ? max : cur < min ? min : cur;
             ParamType = type;
+
             if (type.BaseType != typeof(Enum))
             {
                 ParamList = null;
@@ -352,6 +299,7 @@ namespace SDKTemplate
                 IsComboBoxEnable = true;
                 isSliderEnable = false;
             }
+
             selectIndex = index;
             SliderVisibility = Visibility.Collapsed;
             ComboBoxVisibility = Visibility.Collapsed;
@@ -376,6 +324,5 @@ namespace SDKTemplate
         {
             currentValue = (maxValue + minValue) / 2;
         }
-
     }
 }

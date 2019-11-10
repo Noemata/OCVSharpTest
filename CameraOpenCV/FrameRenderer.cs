@@ -10,11 +10,10 @@
 //*********************************************************
 
 using System;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using System.Threading;
-using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Runtime.CompilerServices;
 using Windows.Graphics.Imaging;
 using Windows.Media.Capture.Frames;
 using Windows.Media.MediaProperties;
@@ -22,8 +21,6 @@ using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
-
-using OpenCvSharp;
 
 namespace SDKTemplate
 {

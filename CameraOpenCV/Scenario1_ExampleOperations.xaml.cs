@@ -8,28 +8,21 @@
 // PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
 //
 //*********************************************************
+
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using System.Threading;
+using System.Diagnostics;
+using System.Threading.Tasks;
+using Windows.Graphics.Imaging;
+using Windows.Media.Capture;
+using Windows.Media.Capture.Frames;
+using Windows.Media.MediaProperties;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using System.Threading;
-using Windows.Graphics.Imaging;
-using Windows.Media.Capture.Frames;
-using Windows.Media.Capture;
-using System.Threading.Tasks;
-using System.Diagnostics;
-using Windows.Media.MediaProperties;
-using System.Collections.ObjectModel;
+using Windows.UI.Xaml.Controls.Primitives;
 
 using OpenCvSharp;
 
@@ -290,8 +283,6 @@ namespace SDKTemplate
             });
         }
 
-
-
         private async void Slider1_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
             await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
@@ -313,21 +304,6 @@ namespace SDKTemplate
                     }
                 }
             });
-        }
-
-        private void Slider1_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
-        {
-
-        }
-
-        private void Slider2_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
-        {
-
-        }
-
-        private void Slider3_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
-        {
-
         }
 
         private async void Collection_ItemClick(object sender, ItemClickEventArgs e)
