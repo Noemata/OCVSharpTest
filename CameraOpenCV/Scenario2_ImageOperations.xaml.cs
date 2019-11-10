@@ -40,22 +40,22 @@ namespace SDKTemplate
 
         public AlgorithmProperty StoredProperty { get; set; }
         public AlgorithmProperty LastStoredProperty { get; set; }
+        private Algorithm storeditem;
 
         private MainPage rootPage;
 
         private FrameRenderer previewRenderer;
         private FrameRenderer outputRenderer;
 
-        private Algorithm storeditem;
-
+        private DispatcherTimer fpsTimer;
         private int frameCount = 0;
 
-        // Synchronization
-        private readonly SemaphoreSlim mLock = new SemaphoreSlim(1);
-        private OcvOp helper;
-        private DispatcherTimer fpsTimer;
-        private VideoFrame cacheFrame;
         private OperationType currentOperation;
+        private OcvOp operation;
+
+        // Rendering
+        private readonly SemaphoreSlim mLock = new SemaphoreSlim(1);
+        private VideoFrame cacheFrame;
 
         public Scenario2_ImageOperations()
         {
@@ -84,7 +84,7 @@ namespace SDKTemplate
             OperationComboBox.ItemsSource = Enum.GetValues(typeof(OperationType));
             OperationComboBox.SelectedIndex = (int)OperationType.Blur;
 
-            helper = new OcvOp();
+            operation = new OcvOp();
             FileOpen.IsEnabled = true;
             FileSaving.IsEnabled = true;
             fpsTimer.Start();
@@ -117,19 +117,19 @@ namespace SDKTemplate
                         // Operate on the image in the manner chosen by the user.
                         if (currentOperation == OperationType.Blur)
                         {
-                            helper.Blur(originalBitmap, outputBitmap, storeditem);
+                            operation.Blur(originalBitmap, outputBitmap, storeditem);
                         }
                         else if (currentOperation == OperationType.HoughLines)
                         {
-                            helper.HoughLines(originalBitmap, outputBitmap, storeditem);
+                            operation.HoughLines(originalBitmap, outputBitmap, storeditem);
                         }
                         else if (currentOperation == OperationType.Contours)
                         {
-                            helper.Contours(originalBitmap, outputBitmap, storeditem);
+                            operation.Contours(originalBitmap, outputBitmap, storeditem);
                         }
                         else if (currentOperation == OperationType.Canny)
                         {
-                            helper.Canny(originalBitmap, outputBitmap, storeditem);
+                            operation.Canny(originalBitmap, outputBitmap, storeditem);
                         }
                         else if (currentOperation == OperationType.MotionDetector)
                         {
@@ -157,7 +157,6 @@ namespace SDKTemplate
             if (comboBox != null && comboBox.IsLoaded == true && (int)currentOperation == comboBox.SelectedIndex)
                 return;
 
-            //UpdateAlgorithm(_storeditem);
             currentOperation = (OperationType)((sender as ComboBox).SelectedItem);
 
             if (OperationType.Blur == currentOperation)
@@ -239,20 +238,6 @@ namespace SDKTemplate
                 {
                     collection.ItemsSource = Algorithm.GetObjects(storeditem);
                 });
-            }
-        }
-
-        private void UpdateAlgorithm(Algorithm algorithm)
-        {
-            if (algorithm != null)
-            {
-                for (int i = 0; i < rootPage.algorithms.Count; i++)
-                {
-                    if (rootPage.algorithms[i].AlgorithmName == algorithm.AlgorithmName)
-                    {
-                        rootPage.algorithms[i].SetObjects(algorithm);
-                    }
-                }
             }
         }
 
