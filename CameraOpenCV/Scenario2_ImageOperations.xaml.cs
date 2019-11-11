@@ -1,23 +1,20 @@
 ﻿using System;
 using System.IO;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
 using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Graphics.Imaging;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Media;
 using Windows.Storage;
+using Windows.Foundation;
 using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
-using Windows.UI.Popups;
+using Windows.Graphics.Imaging;
 using Windows.UI.Xaml;
+using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
+using Windows.UI.Xaml.Media.Imaging;
+using Windows.UI.Xaml.Controls.Primitives;
 
 namespace SDKTemplate
 {

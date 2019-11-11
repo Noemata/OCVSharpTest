@@ -7,8 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    
     <StackPanel>
-
         <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,20,12,12">
             <VisualStateManager.VisualStateGroups>
                 <VisualStateGroup>
@@ -110,5 +110,4 @@
             </SplitView>
         </Grid>
     </StackPanel>
-
 </Page>

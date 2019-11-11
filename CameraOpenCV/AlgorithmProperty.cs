@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
+using System.ComponentModel;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Windows.UI.Xaml;
+
 using OpenCvSharp;
 
 namespace SDKTemplate
