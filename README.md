@@ -4,11 +4,7 @@ This is a quickish adaptation of OpenCVSharp (17 hours worth in the midst of oth
 
 The original repo is located here: https://github.com/shimat/opencvsharp
 
-Surprisingly little tweaking was required to support UWP because of the exceptional work done by the author of OpenCVSharp and vcpkg.  This isn't a fork because it initially started as a hack with no expectation of success.  Hopefully the author of OpenCVSharp will do the integration back into the main repo.
-
-Most aspects of the code are working, at least everything tried so far, but there are still some rough edges in WinRT implementation details.  Also some parts of OpenCV are not available with vcpkg UWP builds.
-
-If you do fix the remaining issues, please leave a note in the issues section here.
+The code changes in this repository have been folded back into the original.  Please use the above in future. Consider this an example only.
 
 Support for compiled headers should really be done something like this, except this won't actually work because of precompiled header limitations:
 
@@ -30,8 +26,6 @@ Any thoughts?
 2. Adjust project settings to reference where things land on your system
 
 3. Do a diff to see what was changed
-
-4. Don't use this code in a production setting
 
 ### Screenshot
 ![Screenshot](https://github.com/Noemata/OCVSharpTest/raw/master/Screenshot.png)
